@@ -11,5 +11,7 @@ public class MobileCompanyActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mobile_company);
+        // todo show all mobile brand
+        // todo grid view ( img + name )
     }
 }

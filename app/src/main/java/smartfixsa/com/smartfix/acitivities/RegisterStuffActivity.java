@@ -11,5 +11,6 @@ public class RegisterStuffActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_stuff);
+        // todo url = > http://www.smartfixsa.com/register/
     }
 }
