@@ -16,6 +16,8 @@ public class MaintenanceRequestOtherActivity extends AppCompatActivity {
         // todo url => http://www.smartfixsa.com/maintenance/
         WebView webView=(WebView)findViewById(R.id.webview_maintenance_request_other);
         webView.setWebViewClient(new WebViewClient());
+        // you must enable java script option
+        webView.getSettings().setJavaScriptEnabled(true);
         webView.loadUrl("http://www.smartfixsa.com/maintenance/");
     }
 }
