@@ -22,7 +22,7 @@ public class MobileCompanyActivity extends AppCompatActivity {
         // todo grid view ( img + name )
         ArrayList<CompanyMobileModel> CompanyMob=new ArrayList<>();
          int[]ImgCompanymob={R.drawable.apple_icon,R.drawable.huawei_icon,R.drawable.htc_icon,R.drawable.nokia_icon,R.drawable.sony_icon,R.drawable.lg_icon,R.drawable.sam_icon};
-         String[] NameComapnymob={"APPLE","HUAWEI","HTC","NOKIA","SONY","LG","SAMSUNG"};
+         String[] NameComapnymob={"Apple","HUAWEI","HTC","NOKIA","SONY","LG","SAMSUNG"};
         for (int i = 0; i <ImgCompanymob.length ; i++) {
             CompanyMobileModel model=new CompanyMobileModel(ImgCompanymob[i],NameComapnymob[i]);
             CompanyMob.add(model);

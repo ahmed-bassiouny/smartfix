@@ -5,4 +5,5 @@
     <string name="maintenance">اطلب صيانة</string>
     <string name="store">المتجر</string>
     <string name="home_page">الصفحة الرئيسية</string>
+    <string name="choose_company_name">اختر الشركه المصنعه</string>
 </resources>
