@@ -1,0 +1,59 @@
+{
+  "project_info": {
+    "project_number": "1030622634890",
+    "firebase_url": "https://smartfix-66ccd.firebaseio.com",
+    "project_id": "smartfix-66ccd",
+    "storage_bucket": "smartfix-66ccd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1030622634890:android:6ace9b4622c8b0af",
+        "android_client_info": {
+          "package_name": "smartfixsa.com.smartfix"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1030622634890-2q514vfvd1rudpclbgnmt0latsjni1j7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "smartfixsa.com.smartfix",
+            "certificate_hash": "cd70e4b155cc34d401601319f88b8df59ab4058d"
+          }
+        },
+        {
+          "client_id": "1030622634890-d6g7j1hd0kg04ffkv76i2i0ja9dm3sn8.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "1030622634890-d6g7j1hd0kg04ffkv76i2i0ja9dm3sn8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBTBLjGr58jreGvnJOQIOg9jXlUvSejBVo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1030622634890-d6g7j1hd0kg04ffkv76i2i0ja9dm3sn8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
