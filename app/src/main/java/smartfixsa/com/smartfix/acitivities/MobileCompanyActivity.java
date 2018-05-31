@@ -1,6 +1,7 @@
 package smartfixsa.com.smartfix.acitivities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -10,9 +11,10 @@ import java.util.ArrayList;
 
 import smartfixsa.com.smartfix.R;
 import smartfixsa.com.smartfix.adapter.MobCompanyAdapter;
+import smartfixsa.com.smartfix.interfaces.ClickListener;
 import smartfixsa.com.smartfix.models.CompanyMobileModel;
 
-public class MobileCompanyActivity extends AppCompatActivity {
+public class MobileCompanyActivity extends AppCompatActivity implements ClickListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,12 +28,20 @@ public class MobileCompanyActivity extends AppCompatActivity {
         for (int i = 0; i <ImgCompanymob.length ; i++) {
             CompanyMobileModel model=new CompanyMobileModel(ImgCompanymob[i],NameComapnymob[i]);
             CompanyMob.add(model);
-            RecyclerView recyclerView=(RecyclerView)findViewById(R.id.recyclercompanymob);
-            recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(),3));
-            MobCompanyAdapter adapter=new MobCompanyAdapter(CompanyMob);
-            recyclerView.setAdapter(adapter);
-
         }
+        RecyclerView recyclerView=(RecyclerView)findViewById(R.id.recyclercompanymob);
+        recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(),3));
+        MobCompanyAdapter adapter=new MobCompanyAdapter(CompanyMob,this);
+        recyclerView.setAdapter(adapter);
 
+    }
+
+    @Override
+    public void onClick(int position) {
+        if(position == 0){
+
+        }else {
+            startActivity(new Intent(this,MaintenanceRequestOtherActivity.class));
+        }
     }
 }

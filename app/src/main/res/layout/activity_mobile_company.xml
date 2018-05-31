@@ -1,24 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".acitivities.MobileCompanyActivity">
 
-    <Button
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:minHeight="?attr/actionBarSize"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:titleTextColor="@android:color/white"
+        android:background="?attr/colorPrimary">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:layout_marginEnd="10dp"
+            android:gravity="center"
+            android:text="@string/maintenance"/>
+    </android.support.v7.widget.Toolbar>
+    <TextView
         android:id="@+id/button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclercompanymob"
-        app:layout_constraintVertical_bias="1.0"
+        android:layout_marginTop="16dp"
         android:text="@string/choose_company_name"
-        android:textSize="13dp"
+        android:textSize="15dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textColor="@color/colorPrimary"
         android:textStyle="bold"
         />
 
@@ -26,7 +41,7 @@
         android:id="@+id/recyclercompanymob"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-         />
+        android:layout_marginTop="5dp"/>
 
 
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>

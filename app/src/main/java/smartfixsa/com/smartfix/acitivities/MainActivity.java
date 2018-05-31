@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements ClickListener {
                 intent = new Intent(this, RegisterStuffActivity.class);
                 break;
             case 3:
+                intent = new Intent(this, MobileCompanyActivity.class);
                 break;
         }
         if (intent != null)
