@@ -7,4 +7,7 @@
     <string name="home_page">الصفحة الرئيسية</string>
     <string name="choose_company_name">اختر الشركه المصنعه</string>
     <string name="welcome">اهلا بكم فى النسخة التجريبية </string>
+    <string name="model_type">موديل الجهاز</string>
+    <string name="change_type">نوع قطع الغيار</string>
+    <string name="submit">تم</string>
 </resources>
