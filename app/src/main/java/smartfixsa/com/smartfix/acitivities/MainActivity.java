@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements ClickListener {
         Intent intent = null;
         switch (position) {
             case 0:
+                intent = new Intent(this, MaintenanceCentersListActivity.class);
                 break;
             case 1:
                 break;
