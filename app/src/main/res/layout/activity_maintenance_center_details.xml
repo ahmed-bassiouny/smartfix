@@ -84,7 +84,8 @@
             android:text="الذهاب الى الموقع"
             android:textColor="@color/white"
             android:textSize="15sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:id="@+id/btn_gotolocation"/>
     </LinearLayout>
 
 

@@ -59,11 +59,13 @@ public class MaintenanceCentersListActivity extends AppCompatActivity implements
 
     @Override
     public void onClick(int position) {
-        if (position == 0) {
+        if (position<0) {
             System.out.println("No postion select");
         } else {
+            System.out.println(centers.get(position));
             Intent i = new Intent(this, MaintenanceCenterDetailsActivity.class);
             i.putExtra("maintennaceCenter", centers.get(position));
+
             startActivity(i);
         }
 
