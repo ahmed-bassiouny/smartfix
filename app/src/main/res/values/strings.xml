@@ -13,6 +13,9 @@
     <string name="name">الاسم</string>
     <string name="address">العنوان</string>
     <string name="services">الخدمات</string>
+    <string name="price">السعر</string>
+    <string name="savetime">مدة الضمان</string>
+    <string name="month">شهر</string>
     <string name="back">رجوع</string>
     <string name="latitude">خطوط العرض</string>
     <string name="longitude">خطوط الطول</string>

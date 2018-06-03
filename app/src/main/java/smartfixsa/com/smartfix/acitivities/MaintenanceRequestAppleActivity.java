@@ -33,8 +33,10 @@ import smartfixsa.com.smartfix.R;
 public class MaintenanceRequestAppleActivity extends AppCompatActivity {
     Spinner ModelType;
     Spinner ChangeType;
-    Button Submit;
-    DatabaseReference databaseApple,databaseItem;
+    TextView Price;
+    TextView SaveTime;
+    String s,t;
+    DatabaseReference databaseApple,databaseItem,getDatabaseItem;
     final List<String> model = new ArrayList<String>();
     final List<String> modeltwo = new ArrayList<String>();
     @Override
@@ -43,7 +45,8 @@ public class MaintenanceRequestAppleActivity extends AppCompatActivity {
         setContentView(R.layout.activity_maintenance_request_apple);
         ModelType=(Spinner)findViewById(R.id.spinner_modeltype);
         ChangeType=(Spinner)findViewById(R.id.spinner_changetype);
-        Submit=(Button)findViewById(R.id.btn_submit);
+        Price=(TextView)findViewById(R.id.tv_price);
+        SaveTime=(TextView) findViewById(R.id.tv_savetime);
 // get first spinner data and Display it
 
 
@@ -65,11 +68,12 @@ public class MaintenanceRequestAppleActivity extends AppCompatActivity {
         ModelType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String s=parent.getItemAtPosition(position).toString();
-                databaseItem=FirebaseDatabase.getInstance().getReference(s);
+                 s=parent.getItemAtPosition(position).toString();
+                databaseItem=FirebaseDatabase.getInstance().getReference("Apple").child(s);
                 databaseItem.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
+                        modeltwo.clear();
                         for(DataSnapshot dataitem:dataSnapshot.getChildren()){
                             String result=dataitem.getKey();
                             modeltwo.add(result);
@@ -91,6 +95,31 @@ public class MaintenanceRequestAppleActivity extends AppCompatActivity {
             }
 
         });
+/*        ChangeType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                 t=parent.getItemAtPosition(position).toString();
+                getDatabaseItem=FirebaseDatabase.getInstance().getReference("Apple").child(s).child(t);
+                getDatabaseItem.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        modeltwo.clear();
+                       System.out.println(dataSnapshot.getValue());
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+
+        });
+*/
 
         }
 }
