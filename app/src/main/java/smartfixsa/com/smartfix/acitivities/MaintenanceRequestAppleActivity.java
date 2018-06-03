@@ -36,7 +36,7 @@ public class MaintenanceRequestAppleActivity extends AppCompatActivity {
     TextView Price;
     TextView SaveTime;
     String s,t;
-    DatabaseReference databaseApple,databaseItem,getDatabaseItem;
+    DatabaseReference databaseApple,databaseItem,DatabasePriceTime;
     final List<String> model = new ArrayList<String>();
     final List<String> modeltwo = new ArrayList<String>();
     @Override
@@ -68,8 +68,8 @@ public class MaintenanceRequestAppleActivity extends AppCompatActivity {
         ModelType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                 s=parent.getItemAtPosition(position).toString();
-                databaseItem=FirebaseDatabase.getInstance().getReference("Apple").child(s);
+                s=parent.getItemAtPosition(position).toString();
+                databaseItem=databaseApple.child(s);
                 databaseItem.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
@@ -81,6 +81,35 @@ public class MaintenanceRequestAppleActivity extends AppCompatActivity {
                         ArrayAdapter<String> areaitem = new ArrayAdapter<String>(MaintenanceRequestAppleActivity.this, android.R.layout.simple_spinner_item, modeltwo);
                         areaitem.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                         ChangeType.setAdapter(areaitem);
+                        ChangeType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                            @Override
+                            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                t=parent.getItemAtPosition(position).toString();
+                                DatabasePriceTime=databaseItem.child(t);
+                                DatabasePriceTime.addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(DataSnapshot dataSnapshot) {
+                                        System.out.println(dataSnapshot.getValue());
+                                        if (dataSnapshot.hasChild("price")) {
+                                            Price.setText(dataSnapshot.child("price").getValue().toString());
+                                            SaveTime.setText(dataSnapshot.child("save Time").getValue().toString());
+                                        }else{
+                                            Toast.makeText(MaintenanceRequestAppleActivity.this,"nothing connection",Toast.LENGTH_LONG).show();
+                                        }
+                                    }
+                                    @Override
+                                    public void onCancelled(DatabaseError databaseError) {
+
+                                    }
+                                });
+                            }
+
+                            @Override
+                            public void onNothingSelected(AdapterView<?> parent) {
+
+                            }
+                        });
+
                     }
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
@@ -95,31 +124,12 @@ public class MaintenanceRequestAppleActivity extends AppCompatActivity {
             }
 
         });
-/*        ChangeType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                 t=parent.getItemAtPosition(position).toString();
-                getDatabaseItem=FirebaseDatabase.getInstance().getReference("Apple").child(s).child(t);
-                getDatabaseItem.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        modeltwo.clear();
-                       System.out.println(dataSnapshot.getValue());
-                    }
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
 
-                    }
-                });
-            }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
 
-            }
 
-        });
-*/
 
-        }
+
+
+    }
 }
