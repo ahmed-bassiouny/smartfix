@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,8 +29,9 @@ public class MaintenanceCenterDetailsActivity extends AppCompatActivity {
     TextView Name, Address, Services;
     DatabaseReference centerDetails;
     Bundle data;
-    String Value,  latitude, Longitude;
+    String Value,  latitude, Longitude, name, address, services;
     Button gotoLocation;
+    ProgressBar progrss_mcdl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,34 +41,46 @@ public class MaintenanceCenterDetailsActivity extends AppCompatActivity {
         Address = (TextView) findViewById(R.id.tv_address_mcd);
         Services = (TextView) findViewById(R.id.tv_services_mcd);
         gotoLocation=(Button)findViewById(R.id.btn_gotolocation);
+        progrss_mcdl=(ProgressBar) findViewById(R.id.progress_mcl);
         data = getIntent().getExtras();
         if (data != null) {
             Value = data.getString("maintennaceCenter");
         }
+        progrss_mcdl.setVisibility(View.VISIBLE);
         centerDetails = FirebaseDatabase.getInstance().getReference("Official Center").child(Value);
         centerDetails.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-System.out.println(dataSnapshot.getValue());
+
                 if (dataSnapshot.hasChild("name")) {
-                    Name.setText(dataSnapshot.child("name").getValue().toString());
-                    Address.setText(dataSnapshot.child("address").getValue().toString());
-                    Services.setText(dataSnapshot.child("services").getValue().toString());
+                    name=dataSnapshot.child("name").getValue().toString();
+                    Name.setText(name);
+
+                    address=dataSnapshot.child("address").getValue().toString();
+                    Address.setText(address);
+
+                    services=dataSnapshot.child("services").getValue().toString();
+                    Services.setText(services);
+                    
+                    progrss_mcdl.setVisibility(View.GONE);
+                    Toast.makeText(MaintenanceCenterDetailsActivity.this,Name+" "+services+" ",Toast.LENGTH_LONG).show();
                     if (dataSnapshot.hasChild("lat")) {
                         latitude=dataSnapshot.child("lat").getValue().toString();
                         Longitude=dataSnapshot.child("lng").getValue().toString();
+
                        gotoLocation.setOnClickListener(new View.OnClickListener() {
                            @Override
                             public void onClick(View v) {
                                gotoLocation.setVisibility(View.VISIBLE);
-                                String uri = String.format(Locale.ENGLISH, "geo:"+latitude+","+ latitude, Longitude);
+                                String uri = String.format(Locale.ENGLISH, "geo:"+latitude+","+Longitude);
+
                                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
                              startActivity(intent);
                             }
                         });
 
                     } else {
-                        gotoLocation.setVisibility(View.INVISIBLE);
+                        gotoLocation.setVisibility(View.GONE);
                     //   Toast.makeText(MaintenanceCenterDetailsActivity.this,"there is no Longitude or latitude for this location ",Toast.LENGTH_LONG).show();
                     }
                 } else {

@@ -32,6 +32,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:id="@+id/progress_mcl"/>
 
         <ImageView
             android:layout_width="match_parent"
@@ -86,7 +91,6 @@
             android:textSize="15sp"
             android:textStyle="bold"
             android:id="@+id/btn_gotolocation"/>
-    </LinearLayout>
 
-
+</LinearLayout>
 </LinearLayout>
