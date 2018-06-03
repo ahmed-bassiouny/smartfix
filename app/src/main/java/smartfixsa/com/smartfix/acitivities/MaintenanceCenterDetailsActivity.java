@@ -21,43 +21,43 @@ import java.util.List;
 import smartfixsa.com.smartfix.R;
 
 public class MaintenanceCenterDetailsActivity extends AppCompatActivity {
-TextView Name,Address,Services,latitude,logitude;
-DatabaseReference centerDetails;
-Bundle data;
-String Value;
+    TextView Name, Address, Services, latitude, logitude;
+    DatabaseReference centerDetails;
+    Bundle data;
+    String Value;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maintenance_center_details);
-        Name=(TextView)findViewById(R.id.tv_name_mcd);
-        Address=(TextView)findViewById(R.id.tv_address_mcd);
-        Services=(TextView)findViewById(R.id.tv_services_mcd);
-        latitude=(TextView)findViewById(R.id.tv_lat_mcd);
-        logitude=(TextView)findViewById(R.id.tv_lng_mcd);
-        data =getIntent().getExtras();
-        if(data!=null){
-            Value=data.getString("maintennaceCenter");
+        Name = (TextView) findViewById(R.id.tv_name_mcd);
+        Address = (TextView) findViewById(R.id.tv_address_mcd);
+        Services = (TextView) findViewById(R.id.tv_services_mcd);
+        latitude = (TextView) findViewById(R.id.tv_lat_mcd);
+        logitude = (TextView) findViewById(R.id.tv_lng_mcd);
+        data = getIntent().getExtras();
+        if (data != null) {
+            Value = data.getString("maintennaceCenter");
         }
-        centerDetails= FirebaseDatabase.getInstance().getReference("Official Center").child(Value);
-        centerDetails.addValueEventListener(new ValueEventListener() {
+        centerDetails = FirebaseDatabase.getInstance().getReference("Official Center").child(Value);
+        centerDetails.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-if(dataSnapshot.hasChild("name")){
-    Name.setText(dataSnapshot.child("name").getValue().toString());
-    Address.setText(dataSnapshot.child("address").getValue().toString());
-    Services.setText(dataSnapshot.child("services").getValue().toString());
-   if(dataSnapshot.hasChild("lat")) {
-       latitude.setText(dataSnapshot.child("lat").getValue().toString());
-       logitude.setText(dataSnapshot.child("lng").getValue().toString());
-   }else
-   {
-       latitude.setText("لا يوجد");
-       logitude.setText("لا يوجد");
-   }
-}else{
-    Toast.makeText(MaintenanceCenterDetailsActivity.this,"nothing connection",Toast.LENGTH_LONG).show();
-}
+                if (dataSnapshot.hasChild("name")) {
+                    Name.setText(dataSnapshot.child("name").getValue().toString());
+                    Address.setText(dataSnapshot.child("address").getValue().toString());
+                    Services.setText(dataSnapshot.child("services").getValue().toString());
+                    if (dataSnapshot.hasChild("lat")) {
+                        latitude.setText(dataSnapshot.child("lat").getValue().toString());
+                        logitude.setText(dataSnapshot.child("lng").getValue().toString());
+                    } else {
+                        latitude.setText("لا يوجد");
+                        logitude.setText("لا يوجد");
+                    }
+                } else {
+                    Toast.makeText(MaintenanceCenterDetailsActivity.this, "nothing connection", Toast.LENGTH_LONG).show();
+                }
                /*                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     MaintenanceCenterModel detail = postSnapshot.getValue(MaintenanceCenterModel.class);
                     Log.e("hamo",detail.getName());
@@ -82,13 +82,14 @@ if(dataSnapshot.hasChild("name")){
                                                    }
 */
 
-                }
+            }
 
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
-            }});
+            }
+        });
 
 
     }

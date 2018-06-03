@@ -26,6 +26,7 @@ public class MaintenanceCentersListActivity extends AppCompatActivity implements
     private RecyclerView recycler;
     private ProgressBar progress;
     private List<String> centers;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,12 +40,12 @@ public class MaintenanceCentersListActivity extends AppCompatActivity implements
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        for(DataSnapshot item:dataSnapshot.getChildren()){
+                        for (DataSnapshot item : dataSnapshot.getChildren()) {
                             String center = item.getKey();
                             centers.add(center);
                         }
                         progress.setVisibility(View.GONE);
-                        recycler.setAdapter(new OfficialCentersAdapter(MaintenanceCentersListActivity.this,centers));
+                        recycler.setAdapter(new OfficialCentersAdapter(MaintenanceCentersListActivity.this, centers));
                         recycler.setVisibility(View.VISIBLE);
                     }
 
@@ -58,13 +59,13 @@ public class MaintenanceCentersListActivity extends AppCompatActivity implements
 
     @Override
     public void onClick(int position) {
-if(position==0){
-    System.out.println("No postion select");
-}else{
-Intent i=new Intent(this,MaintenanceCenterDetailsActivity.class);
-i.putExtra("maintennaceCenter",centers.get(position));
-    startActivity(i);
-}
+        if (position == 0) {
+            System.out.println("No postion select");
+        } else {
+            Intent i = new Intent(this, MaintenanceCenterDetailsActivity.class);
+            i.putExtra("maintennaceCenter", centers.get(position));
+            startActivity(i);
+        }
 
 
     }
