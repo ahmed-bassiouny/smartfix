@@ -63,7 +63,6 @@ public class MaintenanceCenterDetailsActivity extends AppCompatActivity {
                     Services.setText(services);
                     
                     progrss_mcdl.setVisibility(View.GONE);
-                    Toast.makeText(MaintenanceCenterDetailsActivity.this,Name+" "+services+" ",Toast.LENGTH_LONG).show();
                     if (dataSnapshot.hasChild("lat")) {
                         latitude=dataSnapshot.child("lat").getValue().toString();
                         Longitude=dataSnapshot.child("lng").getValue().toString();
@@ -72,10 +71,11 @@ public class MaintenanceCenterDetailsActivity extends AppCompatActivity {
                            @Override
                             public void onClick(View v) {
                                gotoLocation.setVisibility(View.VISIBLE);
-                                String uri = String.format(Locale.ENGLISH, "geo:"+latitude+","+Longitude);
-
-                                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
-                             startActivity(intent);
+                               /*String geoUri = "http://maps.google.com/maps?q=loc:" + latitude + "," + Longitude + " (" + ""+ ")";
+                               Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(geoUri));
+                               startActivity(intent);*/
+                               Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("geo:<lat>,<long>?q=<"+latitude+">,<"+Longitude+">()"));
+                               startActivity(intent);
                             }
                         });
 

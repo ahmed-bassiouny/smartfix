@@ -39,7 +39,7 @@ public class MobileCompanyActivity extends AppCompatActivity implements ClickLis
     @Override
     public void onClick(int position) {
         if(position == 0){
-
+            startActivity(new Intent(this,MaintenanceRequestAppleActivity.class));
         }else {
             startActivity(new Intent(this,MaintenanceRequestOtherActivity.class));
         }

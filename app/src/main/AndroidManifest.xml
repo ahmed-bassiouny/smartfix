@@ -12,6 +12,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".acitivities.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
         </activity>
         <activity android:name=".acitivities.RegisterStuffActivity" />
@@ -21,12 +26,6 @@
         <activity android:name=".acitivities.MaintenanceRequestOtherActivity" />
         <activity android:name=".acitivities.StoreListActivity" />
         <activity android:name=".acitivities.MaintenanceCentersListActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
         </activity>
         <activity android:name=".acitivities.MaintenanceCenterDetailsActivity">
 
