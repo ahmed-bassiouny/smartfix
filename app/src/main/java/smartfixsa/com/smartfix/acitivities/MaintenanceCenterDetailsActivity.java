@@ -33,8 +33,6 @@ public class MaintenanceCenterDetailsActivity extends AppCompatActivity {
         Name = (TextView) findViewById(R.id.tv_name_mcd);
         Address = (TextView) findViewById(R.id.tv_address_mcd);
         Services = (TextView) findViewById(R.id.tv_services_mcd);
-        latitude = (TextView) findViewById(R.id.tv_lat_mcd);
-        logitude = (TextView) findViewById(R.id.tv_lng_mcd);
         data = getIntent().getExtras();
         if (data != null) {
             Value = data.getString("maintennaceCenter");
