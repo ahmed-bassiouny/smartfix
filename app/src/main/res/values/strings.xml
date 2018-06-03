@@ -10,4 +10,12 @@
     <string name="model_type">موديل الجهاز</string>
     <string name="change_type">نوع قطع الغيار</string>
     <string name="submit">تم</string>
+    <string name="name">الاسم</string>
+    <string name="address">العنوان</string>
+    <string name="services">الخدمات</string>
+    <string name="back">رجوع</string>
+    <string name="latitude">خطوط العرض</string>
+    <string name="longitude">خطوط الطول</string>
+    <string name="none">لا يوجد</string>
+
 </resources>

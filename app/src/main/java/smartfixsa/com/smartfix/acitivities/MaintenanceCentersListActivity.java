@@ -1,5 +1,6 @@
 package smartfixsa.com.smartfix.acitivities;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -57,6 +58,14 @@ public class MaintenanceCentersListActivity extends AppCompatActivity implements
 
     @Override
     public void onClick(int position) {
+if(position==0){
+    System.out.println("No postion select");
+}else{
+Intent i=new Intent(this,MaintenanceCenterDetailsActivity.class);
+i.putExtra("maintennaceCenter",centers.get(position));
+    startActivity(i);
+}
+
 
     }
 }
