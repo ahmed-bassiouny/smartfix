@@ -26,10 +26,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.GenericTypeIndicator;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -43,13 +40,11 @@ public class MaintenanceRequestAppleActivity extends AppCompatActivity implement
     Spinner ChangeType;
     TextView Price;
     TextView SaveTime;
-    String s,t; // afhm eh mn s , t ya fathyyyyyyyyyyyyyyyy
-    // ar7mny ya fathy
+    String typeofmobileselected,typeofitemchangeselected; // items selected from spinner
     DatabaseReference databaseApple,databaseItem,DatabasePriceTime;
-    // model , model two
-    // lw 3andy 5 array list yeb2a model five kman s7 ?????
-    final List<String> model = new ArrayList<String>();
-    final List<String> modeltwo = new ArrayList<String>();
+
+    final List<String> mobiletypeList = new ArrayList<String>();// list of mobiles type to fill modelType spinner
+    final List<String> itemchangeList = new ArrayList<String>();// list of change type to fill  changetype Spinner
 
     private LocationManager locationManager;
     private int requestLocationPermission = 125;
@@ -70,9 +65,9 @@ public class MaintenanceRequestAppleActivity extends AppCompatActivity implement
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for(DataSnapshot data:dataSnapshot.getChildren()){
                     String result=data.getKey();
-                    model.add(result);
+                    mobiletypeList.add(result);
                 }
-                ArrayAdapter<String> areasAdapter = new ArrayAdapter<String>(MaintenanceRequestAppleActivity.this, android.R.layout.simple_spinner_item, model);
+                ArrayAdapter<String> areasAdapter = new ArrayAdapter<String>(MaintenanceRequestAppleActivity.this, android.R.layout.simple_spinner_item, mobiletypeList);
                 areasAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 ModelType.setAdapter(areasAdapter);
             }
@@ -82,24 +77,28 @@ public class MaintenanceRequestAppleActivity extends AppCompatActivity implement
         ModelType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                s=parent.getItemAtPosition(position).toString();
-                databaseItem=databaseApple.child(s);
+                typeofmobileselected=parent.getItemAtPosition(position).toString();
+// get second spinner and display it
+                databaseItem=databaseApple.child(typeofmobileselected);
                 databaseItem.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        modeltwo.clear();
+                        itemchangeList.clear();
                         for(DataSnapshot dataitem:dataSnapshot.getChildren()){
                             String result=dataitem.getKey();
-                            modeltwo.add(result);
+                            itemchangeList.add(result);
                         }
-                        ArrayAdapter<String> areaitem = new ArrayAdapter<String>(MaintenanceRequestAppleActivity.this, android.R.layout.simple_spinner_item, modeltwo);
+                        ArrayAdapter<String> areaitem = new ArrayAdapter<String>(MaintenanceRequestAppleActivity.this, android.R.layout.simple_spinner_item, itemchangeList);
+
                         areaitem.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                         ChangeType.setAdapter(areaitem);
                         ChangeType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                             @Override
+ // when select Spinner 1 and 2 will display
+ // price and save time of model type
                             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                                t=parent.getItemAtPosition(position).toString();
-                                DatabasePriceTime=databaseItem.child(t);
+                                typeofitemchangeselected=parent.getItemAtPosition(position).toString();
+                                DatabasePriceTime=databaseItem.child(typeofitemchangeselected);
                                 DatabasePriceTime.addValueEventListener(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(DataSnapshot dataSnapshot) {
