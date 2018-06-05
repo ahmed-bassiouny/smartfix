@@ -1,5 +1,10 @@
 package smartfixsa.com.smartfix.acitivities;
 
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +19,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.location.LocationListener;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -28,17 +34,25 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import smartfixsa.com.smartfix.LocationManager;
+import android.Manifest;
 import smartfixsa.com.smartfix.R;
 
-public class MaintenanceRequestAppleActivity extends AppCompatActivity {
+public class MaintenanceRequestAppleActivity extends AppCompatActivity implements LocationListener {
     Spinner ModelType;
     Spinner ChangeType;
     TextView Price;
     TextView SaveTime;
-    String s,t;
+    String s,t; // afhm eh mn s , t ya fathyyyyyyyyyyyyyyyy
+    // ar7mny ya fathy
     DatabaseReference databaseApple,databaseItem,DatabasePriceTime;
+    // model , model two
+    // lw 3andy 5 array list yeb2a model five kman s7 ?????
     final List<String> model = new ArrayList<String>();
     final List<String> modeltwo = new ArrayList<String>();
+
+    private LocationManager locationManager;
+    private int requestLocationPermission = 125;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -127,9 +141,42 @@ public class MaintenanceRequestAppleActivity extends AppCompatActivity {
 
 
 
+        // check location permission
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            locationManager = new LocationManager(this, this);
+        } else {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, requestLocationPermission);
+        }
 
+    }
 
+    // on permission result
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == requestLocationPermission && grantResults[0] == PackageManager.PERMISSION_DENIED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, requestLocationPermission);
+        } else if (requestCode == requestLocationPermission && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            locationManager = new LocationManager(this, this);
+        }
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (locationManager != null)
+            locationManager.addListener();
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        locationManager.removeListener(this);
+    }
 
+    @Override
+    public void onLocationChanged(Location location) {
+        // here you can get lat , lng
+        // location.getLatitude()
+        //location.getLongitude()
     }
 }
