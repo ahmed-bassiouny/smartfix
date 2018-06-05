@@ -5,8 +5,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_margin="7dp"
+  android:layoutDirection="rtl"
+    android:textDirection="rtl"
     tools:context=".acitivities.MaintenanceRequestAppleActivity">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        app:titleTextColor="@android:color/white">
+
+        <TextView
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:gravity="center"
+            android:textColor="@color/white"
+             android:text="اطلب صيانة"
+            android:textSize="20sp" />
+    </android.support.v7.widget.Toolbar>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -21,6 +40,8 @@
             android:text="@string/model_type"
             android:layout_margin="9dp"
             android:padding="3dp"
+            android:textStyle="bold"
+            android:textSize="18sp"
 
             />
 
@@ -28,9 +49,14 @@
             android:id="@+id/spinner_modeltype"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="2dp"
+            android:layout_margin="9dp"
             android:padding="3dp"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:gravity="center"
+            />
+
+
+
 
     </LinearLayout>
 
@@ -40,22 +66,25 @@
         android:orientation="horizontal"
         android:layout_margin="5dp"
         android:padding="5dp">
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0"
             android:text="@string/change_type"
             android:layout_margin="9dp"
-            android:padding="3dp"/>
+            android:padding="3dp"
+            android:textStyle="bold"
+            android:textSize="18sp"/>
 
         <Spinner
             android:id="@+id/spinner_changetype"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="2dp"
+            android:layout_margin="9dp"
             android:padding="3dp"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:gravity="fill"
+            />
     </LinearLayout>
 
 
@@ -72,15 +101,24 @@
             android:layout_weight="0"
             android:text="@string/price"
             android:layout_margin="9dp"
-            android:padding="3dp"/>
+            android:padding="3dp"
+            android:textStyle="bold"
+            android:textSize="18sp"/>
 
         <TextView
             android:id="@+id/tv_price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="2dp"
+            android:layout_margin="9dp"
             android:padding="3dp"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:gravity="center"/>
+
+
+
+
     </LinearLayout>
 
 
@@ -97,30 +135,51 @@
             android:layout_weight="0"
             android:text="@string/savetime"
             android:layout_margin="9dp"
-            android:padding="3dp"/>
+            android:padding="3dp"
+            android:textStyle="bold"
+            android:textSize="18sp"/>
+
 
         <TextView
             android:id="@+id/tv_savetime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="2dp"
+            android:layout_margin="9dp"
             android:padding="3dp"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:gravity="center"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0"
             android:text="@string/month"
             android:layout_margin="9dp"
-            android:padding="3dp"/>
+            android:padding="3dp"
+            android:textStyle="bold"
+            android:textSize="18sp"/>
+
+
+
 
     </LinearLayout>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/btn_submit"
-        android:layout_gravity="center"
-        android:text="@string/submit"/>
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/button_radius"
+        android:paddingBottom="10dp"
+        android:paddingEnd="15dp"
+        android:paddingStart="15dp"
+        android:paddingTop="10dp"
+        android:text="الذهاب الى اقرب مركز"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        android:textStyle="bold"/>
 
 </LinearLayout>
 
