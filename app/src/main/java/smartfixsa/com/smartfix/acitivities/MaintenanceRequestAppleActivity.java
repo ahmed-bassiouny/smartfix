@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,14 +35,25 @@ import java.util.List;
 import smartfixsa.com.smartfix.LocationManager;
 import android.Manifest;
 import smartfixsa.com.smartfix.R;
+import smartfixsa.com.smartfix.models.OfficialCenterModel;
 
 public class MaintenanceRequestAppleActivity extends AppCompatActivity implements LocationListener {
     Spinner ModelType;
     Spinner ChangeType;
     TextView Price;
     TextView SaveTime;
-    String typeofmobileselected,typeofitemchangeselected; // items selected from spinner
-    DatabaseReference databaseApple,databaseItem,DatabasePriceTime;
+    Button getdatalocation;
+    ProgressBar progress_getddata;
+
+
+    String typeofmobileselected,typeofitemchangeselected  // items selected from spinner
+            , Longitude, Latitude; // items to get location user
+    DatabaseReference databaseApple,databaseItem,DatabasePriceTime,
+            officialcenterreference; //Data reference for all data of Official Center
+    // Object of Officail center and array list of it
+    // list of Officail Center will used in aonther Class
+    OfficialCenterModel officialCenterModel=new OfficialCenterModel();
+    ArrayList<OfficialCenterModel> officialcenter = new ArrayList<>();
 
     final List<String> mobiletypeList = new ArrayList<String>();// list of mobiles type to fill modelType spinner
     final List<String> itemchangeList = new ArrayList<String>();// list of change type to fill  changetype Spinner
@@ -56,7 +68,9 @@ public class MaintenanceRequestAppleActivity extends AppCompatActivity implement
         ChangeType=(Spinner)findViewById(R.id.spinner_changetype);
         Price=(TextView)findViewById(R.id.tv_price);
         SaveTime=(TextView) findViewById(R.id.tv_savetime);
-// get first spinner data and Display it
+        getdatalocation=(Button)findViewById(R.id.btn_gotolocation);
+        progress_getddata=(ProgressBar)findViewById(R.id.progress_getdatalocation);
+        // get first spinner data and Display it
 
 
         databaseApple= FirebaseDatabase.getInstance().getReference("Apple");
@@ -94,8 +108,8 @@ public class MaintenanceRequestAppleActivity extends AppCompatActivity implement
                         ChangeType.setAdapter(areaitem);
                         ChangeType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                             @Override
- // when select Spinner 1 and 2 will display
- // price and save time of model type
+                            // when select Spinner 1 and 2 will display
+                            // price and save time of model type
                             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                                 typeofitemchangeselected=parent.getItemAtPosition(position).toString();
                                 DatabasePriceTime=databaseItem.child(typeofitemchangeselected);
@@ -138,14 +152,25 @@ public class MaintenanceRequestAppleActivity extends AppCompatActivity implement
 
         });
 
-
-
         // check location permission
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             locationManager = new LocationManager(this, this);
         } else {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, requestLocationPermission);
         }
+
+        // will be visible until get data
+        progress_getddata.setVisibility(View.VISIBLE);
+        getdatalocation.setVisibility(View.GONE);
+
+        //Button Click Lisnter
+        getdatalocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getdatalocation.setVisibility(View.VISIBLE);
+                RetreiveOfficialCenterObject();
+            }
+        });
 
     }
 
@@ -177,5 +202,46 @@ public class MaintenanceRequestAppleActivity extends AppCompatActivity implement
         // here you can get lat , lng
         // location.getLatitude()
         //location.getLongitude()
+        Longitude=String.valueOf(location.getLongitude());
+        Latitude=String.valueOf(location.getAltitude());
+        Toast.makeText(MaintenanceRequestAppleActivity.this,"Longitude : "+Longitude+" Latitude : "+Latitude,Toast.LENGTH_SHORT).show();
     }
+    private ArrayList<OfficialCenterModel>RetreiveOfficialCenterObject(){
+        officialcenterreference = FirebaseDatabase.getInstance().getReference("Official Center");
+        officialcenterreference.addListenerForSingleValueEvent(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()) {
+                    for (DataSnapshot data : dataSnapshot.getChildren()) {
+                        officialcenter.clear();
+                        if(!data.hasChild("lat")&&!data.hasChild("lng")){
+                            Log.e("hhhhhhhhhhhhhhhhhhh :", data.getValue().toString());
+                            officialCenterModel.setName(data.child("name").getValue().toString());
+                            officialCenterModel.setAddress(data.child("address").getValue().toString());
+                            officialCenterModel.setServices(data.child("services").getValue().toString());
+                            officialCenterModel.setLatitude("0");
+                            officialCenterModel.setLongitude("0");
+                            officialcenter.add(officialCenterModel);
+                        }else {
+                            Log.e("hhhhhhhhhhhhhhhhhhh :", data.getValue().toString());
+                            officialCenterModel.setName(data.child("name").getValue().toString());
+                            officialCenterModel.setAddress(data.child("address").getValue().toString());
+                            officialCenterModel.setServices(data.child("services").getValue().toString());
+                            officialCenterModel.setLatitude(data.child("lat").getValue().toString());
+                            officialCenterModel.setLongitude(data.child("lng").getValue().toString());
+                            officialcenter.add(officialCenterModel);
+                        }
+
+                    }
+                }else {Toast.makeText(MaintenanceRequestAppleActivity.this,"there is no data here", Toast.LENGTH_LONG).show();}
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        return officialcenter;  }
 }

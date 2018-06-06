@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-  android:layoutDirection="rtl"
+    android:layoutDirection="rtl"
     android:textDirection="rtl"
     tools:context=".acitivities.MaintenanceRequestAppleActivity">
     <android.support.v7.widget.Toolbar
@@ -23,7 +23,7 @@
             android:layout_marginEnd="10dp"
             android:gravity="center"
             android:textColor="@color/white"
-             android:text="اطلب صيانة"
+            android:text="اطلب صيانة"
             android:textSize="20sp" />
     </android.support.v7.widget.Toolbar>
     <LinearLayout
@@ -168,7 +168,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/btn_submit"
+        android:id="@+id/btn_getdatalocation"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="60dp"
         android:background="@drawable/button_radius"
@@ -180,6 +180,11 @@
         android:textColor="@color/white"
         android:textSize="15sp"
         android:textStyle="bold"/>
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:id="@+id/progress_getdatalocation"/>
 
 </LinearLayout>
 
