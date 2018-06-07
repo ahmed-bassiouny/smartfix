@@ -33,6 +33,7 @@ public class MaintenanceCenterDetailsActivity extends AppCompatActivity {
     Button gotoLocation;
     ProgressBar progrss_mcdl;
 
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
