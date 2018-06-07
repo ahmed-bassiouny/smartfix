@@ -4,12 +4,8 @@ public class StoreListModel {
     String product;
     String company;
     String center;
+    String image;
 
-    public StoreListModel(String product, String company, String center) {
-        this.product = product;
-        this.company = company;
-        this.center = center;
-    }
 
     public StoreListModel() {
     }
@@ -36,5 +32,13 @@ public class StoreListModel {
 
     public void setCenter(String center) {
         this.center = center;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

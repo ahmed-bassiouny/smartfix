@@ -7,7 +7,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 
@@ -27,12 +30,14 @@ public class StoreListAdapter extends RecyclerView.Adapter<StoreListAdapter.View
         TextView centername;
         TextView productname;
         TextView companyname;
+        ImageView imageView2;
 
         public ViewHolder(View itemView) {
             super(itemView);
             centername = itemView.findViewById(R.id.textView2);
             productname = itemView.findViewById(R.id.textView3);
             companyname = itemView.findViewById(R.id.textView4);
+            imageView2 = itemView.findViewById(R.id.imageView2);
         }
     }
 
@@ -55,6 +60,7 @@ public class StoreListAdapter extends RecyclerView.Adapter<StoreListAdapter.View
         StoreListModel slm = products.get(position);
         holder.productname.setText(slm.getProduct());
         holder.companyname.setText(slm.getCompany());
+        Glide.with(context).load(slm.getImage()).into(holder.imageView2);
         mycenter = slm.getCenter();
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,7 +68,7 @@ public class StoreListAdapter extends RecyclerView.Adapter<StoreListAdapter.View
 
                 Intent intent = new Intent(view.getContext(), MaintenanceCenterDetailsActivity.class);
                 intent.putExtra("center_name", mycenter);
-                view.getContext().startActivity(intent);
+                context.startActivity(intent);
 
             }
         });

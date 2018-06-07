@@ -46,7 +46,7 @@ public class StoreListActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(),2));
         dbref=database.getReference();
         progress.setVisibility(View.VISIBLE);
-        dbref.child("Products").addValueEventListener(new ValueEventListener() {
+        dbref.child("Products").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot data:dataSnapshot.getChildren()){
