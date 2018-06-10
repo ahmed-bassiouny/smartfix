@@ -5,6 +5,7 @@ public class StoreListModel {
     String company;
     String center;
     String image;
+    Long price;
 
 
     public StoreListModel() {
@@ -40,5 +41,13 @@ public class StoreListModel {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public Long getPrice() {
+        return price;
+    }
+
+    public void setPrice(Long price) {
+        this.price = price;
     }
 }

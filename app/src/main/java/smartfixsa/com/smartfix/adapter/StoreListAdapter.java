@@ -16,6 +16,7 @@ import java.util.List;
 
 import smartfixsa.com.smartfix.R;
 import smartfixsa.com.smartfix.acitivities.MaintenanceCenterDetailsActivity;
+import smartfixsa.com.smartfix.acitivities.MaintenanceCentersListActivity;
 import smartfixsa.com.smartfix.models.StoreListModel;
 
 /**
@@ -30,7 +31,9 @@ public class StoreListAdapter extends RecyclerView.Adapter<StoreListAdapter.View
         TextView centername;
         TextView productname;
         TextView companyname;
+        TextView productprice;
         ImageView imageView2;
+
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -38,6 +41,7 @@ public class StoreListAdapter extends RecyclerView.Adapter<StoreListAdapter.View
             productname = itemView.findViewById(R.id.textView3);
             companyname = itemView.findViewById(R.id.textView4);
             imageView2 = itemView.findViewById(R.id.imageView2);
+            productprice=itemView.findViewById(R.id.tv_productprice);
         }
     }
 
@@ -60,13 +64,14 @@ public class StoreListAdapter extends RecyclerView.Adapter<StoreListAdapter.View
         StoreListModel slm = products.get(position);
         holder.productname.setText(slm.getProduct());
         holder.companyname.setText(slm.getCompany());
+        holder.productprice.setText(slm.getPrice().toString());
         Glide.with(context).load(slm.getImage()).into(holder.imageView2);
         mycenter = slm.getCenter();
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(view.getContext(), MaintenanceCenterDetailsActivity.class);
+                Intent intent = new Intent(view.getContext(), MaintenanceCentersListActivity.class);
                 intent.putExtra("center_name", mycenter);
                 context.startActivity(intent);
 
