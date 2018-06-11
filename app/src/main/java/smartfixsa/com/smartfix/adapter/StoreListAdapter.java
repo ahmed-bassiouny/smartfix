@@ -71,8 +71,8 @@ public class StoreListAdapter extends RecyclerView.Adapter<StoreListAdapter.View
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(view.getContext(), MaintenanceCentersListActivity.class);
-                intent.putExtra("center_name", mycenter);
+                Intent intent = new Intent(view.getContext(), MaintenanceCenterDetailsActivity.class);
+                intent.putExtra("maintennaceCenter", mycenter);
                 context.startActivity(intent);
 
             }
