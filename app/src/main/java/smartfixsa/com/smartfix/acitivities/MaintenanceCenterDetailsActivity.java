@@ -7,10 +7,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,9 +31,10 @@ public class MaintenanceCenterDetailsActivity extends AppCompatActivity {
     TextView Name, Address, Services;
     DatabaseReference centerDetails;
     Bundle data;
-    String Value,  latitude, Longitude, name, address, services;
+    String Value,  latitude, Longitude, name, address, services,imageUrl;
     Button gotoLocation;
     ProgressBar progrss_mcdl;
+    ImageView image;
 
     
     @Override
@@ -43,6 +46,7 @@ public class MaintenanceCenterDetailsActivity extends AppCompatActivity {
         Services = (TextView) findViewById(R.id.tv_services_mcd);
         gotoLocation=(Button)findViewById(R.id.btn_gotolocation);
         progrss_mcdl=(ProgressBar) findViewById(R.id.progress_mcl);
+        image = findViewById(R.id.image);
         data = getIntent().getExtras();
         if (data != null) {
             Value = data.getString("maintennaceCenter");
@@ -62,7 +66,10 @@ public class MaintenanceCenterDetailsActivity extends AppCompatActivity {
 
                     services=dataSnapshot.child("services").getValue().toString();
                     Services.setText(services);
-                    
+                    imageUrl  = dataSnapshot.child("image").getValue().toString();
+                    if(imageUrl != null && !imageUrl.isEmpty())
+                        Glide.with(MaintenanceCenterDetailsActivity.this).load(imageUrl).into(image);
+
                     progrss_mcdl.setVisibility(View.GONE);
                     if (dataSnapshot.hasChild("lat")) {
                         latitude=dataSnapshot.child("lat").getValue().toString();

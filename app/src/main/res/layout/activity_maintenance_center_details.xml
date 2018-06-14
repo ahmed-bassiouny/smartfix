@@ -48,6 +48,7 @@
                 android:layout_height="200dp"
                 android:layout_margin="10dp"
                 android:scaleType="fitXY"
+                android:id="@+id/image"
                 android:src="@drawable/placeholder" />
 
             <TextView
